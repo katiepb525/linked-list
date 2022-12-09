@@ -69,7 +69,6 @@ class LinkedList
   end
 
   def to_s
-    binding.pry
     # curr node (head to start)
     curr_node = @head
     # intialize next node/next id
@@ -120,7 +119,6 @@ jill.next_node= sam.object_id
 sam.next_node = bob.object_id
 # bob has no next node
 list = LinkedList.new(joe, bob)
-
 
 list.to_s
 p list.size
