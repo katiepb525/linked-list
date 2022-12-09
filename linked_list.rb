@@ -5,10 +5,10 @@ require 'objspace'
 class LinkedList
   attr_reader :size, :head, :tail
 
-  def initialize(head)
+  def initialize(head, tail)
     @size = size
     @head = head
-    @tail = nil
+    @tail = tail
   end
 
   # add node to the end of list
@@ -69,20 +69,26 @@ class LinkedList
 
   end
 
-  def to_s(node)
-    #value of curr node
-    curr_node = node.value
-    #next node is just the object id
-    next_id = node.next_node
-    if next_id == nil
-      puts "[ NODE #{curr_node} ] -> nil"
-      return
-    else
+  def to_s
+    binding.pry
+    # curr node (head to start)
+    curr_node = @head
+    # intialize next node/next id
+    next_node = nil
+    next_id = nil
+    #until tail is reached
+    until next_node == @tail
+      # put value of current node
+      puts "[ NODE #{curr_node.value} ] ->"
+      # get obj id of next node from curr_node
+      next_id = curr_node.next_node
       # convert object id to reference to actual object
       next_node = ObjectSpace._id2ref(next_id)
-      puts "[ NODE #{curr_node} ] ->"
-      to_s(next_node)
+      # set next_node as curr_node
+      curr_node = next_node
     end
+
+    puts "[ NODE #{curr_node.value} ] -> nil"
   end
 end
 
@@ -100,7 +106,6 @@ class Node
 
 end
 
-list = LinkedList.new
 
 # some random nodes to store in our list
 joe = Node.new('joe')
@@ -115,6 +120,7 @@ carly.next_node= jill.object_id
 jill.next_node= sam.object_id
 sam.next_node = bob.object_id
 # bob has no next node
+list = LinkedList.new(joe, bob)
 
-list.to_s(joe)
-list.size
+
+list.to_s
