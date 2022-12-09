@@ -67,13 +67,33 @@ end
 
 # individual node
 class Node
-  attr_accessor :value, :next_node
+  attr_reader :value
+  attr_accessor :next_node
 
-  def initalize
+  def initialize(value=nil)
     # value of the current node
-    @value = nil
+    @value = value
     # pointer to the next node in queue
     @next_node = nil
   end
 
 end
+
+list = LinkedList.new
+
+# some random nodes to store in our list
+joe = Node.new('joe')
+carly = Node.new('carly')
+jill = Node.new('jill')
+sam = Node.new('sam')
+bob = Node.new('bob')
+
+#link the nodes by assigning the object id
+joe.next_node= carly.object_id
+carly.next_node= jill.object_id
+jill.next_node= sam.object_id
+sam.next_node = bob.object_id
+# bob has no next node
+
+list.to_s(joe)
+list.size
