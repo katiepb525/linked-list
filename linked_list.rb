@@ -3,9 +3,16 @@ require 'objspace'
 
 # representation of complete list
 class LinkedList
+  attr_reader :size, :head, :tail
+
+  def initialize(head)
+    @size = size
+    @head = head
+    @tail = nil
+  end
+
   # add node to the end of list
   def append(value)
-
   end
 
   # add node to the beginning of the list
@@ -15,12 +22,26 @@ class LinkedList
 
   # return size of the list
   def size
-
-  end
-
-  # return first node in the list
-  def head
-
+    size = 0
+    # if no size has been specified for instance variable
+    if @size == nil
+      # iterate through list until last node
+      until next_id == nil
+        if size.zero?
+          curr_node = @head
+        end
+        # value of curr node
+        curr_node = node.value
+        # next node is just the object id
+        next_id = node.next_node
+        # convert object id to reference to actual object
+        next_node = ObjectSpace._id2ref(next_id)
+        size += 1
+        curr_node = next_node
+      end
+    end
+    # return size
+    size
   end
 
   # return last node in list
