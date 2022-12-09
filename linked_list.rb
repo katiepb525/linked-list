@@ -92,7 +92,30 @@ class LinkedList
 
   # return index of node with value, or nil if doesnt exist.
   def find(value)
+    # curr node (head to start)
+    curr_node = @head
+    # intialize next node/next id
+    next_node = nil
+    next_id = nil
 
+    #count amount of times iterated
+    count = 1
+
+    #until value is reached
+    until curr_node.value == value
+      # get obj id of next node from curr_node
+      next_id = curr_node.next_node
+      # convert object id to reference to actual object
+      next_node = ObjectSpace._id2ref(next_id)
+      # set next_node as curr_node
+      curr_node = next_node
+      count +=1 
+      if next_node == @tail && @tail.value != value
+        puts 'Value not found'
+        return
+      end
+    end
+    puts "The index of the value youre looking for is ##{count}"
   end
 
   def to_s
@@ -161,3 +184,6 @@ list.to_s
 list.append('james')
 
 list.to_s
+
+list.find('carly')
+list.find('jones')
