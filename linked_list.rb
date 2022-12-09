@@ -1,9 +1,8 @@
+require 'pry-byebug'
+require 'objspace'
+
 # representation of complete list
 class LinkedList
-  def initalize
-    
-  end
-
   # add node to the end of list
   def append(value)
 
