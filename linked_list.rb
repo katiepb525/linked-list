@@ -23,25 +23,24 @@ class LinkedList
   # return size of the list
   def size
     size = 0
-    # if no size has been specified for instance variable
-    if @size == nil
-      # iterate through list until last node
-      until next_id == nil
-        if size.zero?
-          curr_node = @head
-        end
-        # value of curr node
-        curr_node = node.value
-        # next node is just the object id
-        next_id = node.next_node
-        # convert object id to reference to actual object
-        next_node = ObjectSpace._id2ref(next_id)
-        size += 1
-        curr_node = next_node
-      end
+    # curr node (head to start)
+    curr_node = @head
+    # intialize next node/next id
+    next_node = nil
+    next_id = nil
+    #until tail is reached
+    until next_node == @tail
+      # update size
+      size += 1
+      # get obj id of next node from curr_node
+      next_id = curr_node.next_node
+      # convert object id to reference to actual object
+      next_node = ObjectSpace._id2ref(next_id)
+      # set next_node as curr_node
+      curr_node = next_node
     end
-    # return size
-    size
+    # return result (plus one because loop ended)
+    size + 1
   end
 
   # return last node in list
@@ -124,3 +123,4 @@ list = LinkedList.new(joe, bob)
 
 
 list.to_s
+p list.size
