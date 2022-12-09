@@ -12,8 +12,17 @@ class LinkedList
   end
 
   # add node to the end of list
-  def append(value)
+  def append(value)    
+    # create new node for new tail
+    new_tail = Node.new(value)
 
+    #assign object id of new tail to current tail
+    @tail.next_node = new_tail.object_id
+
+    #reassign new node as tail
+    @tail = new_tail
+    
+    p "Node created. New tail: #{@tail.value}"
   end
 
   # add node to the beginning of the list
@@ -146,5 +155,9 @@ p "current tail:"
 p list.tail.value
 
 list.prepend('sarah')
+
+list.to_s
+
+list.append('james')
 
 list.to_s
