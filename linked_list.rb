@@ -59,7 +59,21 @@ class LinkedList
 
   # find node by index
   def at(index)
-
+    # curr node (head to start)
+    curr_node = @head
+    # intialize next node/next id
+    next_node = nil
+    next_id = nil
+    # iterate given amount of times
+    (index - 1).times do
+      # get obj id of next node from curr_node
+      next_id = curr_node.next_node
+      # convert object id to reference to actual object
+      next_node = ObjectSpace._id2ref(next_id)
+      # set next_node as curr_node
+      curr_node = next_node
+    end
+    curr_node.value
   end
 
   # remove last node
@@ -207,3 +221,4 @@ list.find('carly')
 list.find('jones')
 
 p list.contains?('carly')
+p list.at(3)
