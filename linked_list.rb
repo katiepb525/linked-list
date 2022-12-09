@@ -48,6 +48,21 @@ class LinkedList
 
   end
 
+  def to_s(node)
+    #value of curr node
+    curr_node = node.value
+    #next node is just the object id
+    next_id = node.next_node
+    if next_id == nil
+      puts "[ NODE #{curr_node} ] -> nil"
+      return
+    else
+      # convert object id to reference to actual object
+      next_node = ObjectSpace._id2ref(next_id)
+      puts "[ NODE #{curr_node} ] ->"
+      to_s(next_node)
+    end
+  end
 end
 
 # individual node
