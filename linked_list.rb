@@ -13,6 +13,7 @@ class LinkedList
 
   # add node to the end of list
   def append(value)
+
   end
 
   # add node to the beginning of the list
@@ -50,7 +51,26 @@ class LinkedList
 
   # remove last node
   def pop
-    
+    # curr node (head to start)
+    curr_node = @head
+    # intialize next node/next id
+    next_node = nil
+    next_id = nil
+    #until the next_id of the curr object is equivalent to the tail
+    until curr_node.next_node == @tail.object_id
+      # get obj id of next node from curr_node
+      next_id = curr_node.next_node
+      # convert object id to reference to actual object
+      next_node = ObjectSpace._id2ref(next_id)
+      # set next_node as curr_node
+      curr_node = next_node
+    end
+    binding.pry
+    # store popped object
+    p "Popped #{@tail.value}"
+    # reassign current node as tail
+    @tail = curr_node
+    curr_node
   end
 
   # check if list contains node with value
@@ -99,7 +119,6 @@ class Node
 
 end
 
-
 # some random nodes to store in our list
 joe = Node.new('joe')
 carly = Node.new('carly')
@@ -117,3 +136,8 @@ list = LinkedList.new(joe, bob)
 
 list.to_s
 p list.size
+p "current tail:"
+p list.tail.value
+list.pop
+p "current tail:"
+p list.tail.value
