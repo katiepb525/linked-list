@@ -65,7 +65,6 @@ class LinkedList
       # set next_node as curr_node
       curr_node = next_node
     end
-    binding.pry
     # store popped object
     p "Popped #{@tail.value}"
     # reassign current node as tail
