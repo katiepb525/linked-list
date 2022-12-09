@@ -87,7 +87,25 @@ class LinkedList
 
   # check if list contains node with value
   def contains?(value)
-
+    # curr node (head to start)
+    curr_node = @head
+    # intialize next node/next id
+    next_node = nil
+    next_id = nil
+    
+    #until value is reached
+    until curr_node.value == value
+      # get obj id of next node from curr_node
+      next_id = curr_node.next_node
+      # convert object id to reference to actual object
+      next_node = ObjectSpace._id2ref(next_id)
+      # set next_node as curr_node
+      curr_node = next_node
+      if next_node == @tail && @tail.value != value
+        return false
+      end
+    end
+    true
   end
 
   # return index of node with value, or nil if doesnt exist.
@@ -187,3 +205,5 @@ list.to_s
 
 list.find('carly')
 list.find('jones')
+
+p list.contains?('carly')
