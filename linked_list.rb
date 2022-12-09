@@ -43,11 +43,6 @@ class LinkedList
     size + 1
   end
 
-  # return last node in list
-  def tail
-
-  end
-
   # find node by index
   def at(index)
 
