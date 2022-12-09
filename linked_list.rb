@@ -18,7 +18,11 @@ class LinkedList
 
   # add node to the beginning of the list
   def prepend(value)
-
+    #get copy of old head
+    old_head = @head.clone
+    # create new value for head, using obj_id of last head value..
+    @head = Node.new(value, @head.object_id)
+    p "Node created. New head: #{@head.value}"
   end
 
   # return size of the list
@@ -109,11 +113,11 @@ class Node
   attr_reader :value
   attr_accessor :next_node
 
-  def initialize(value=nil)
+  def initialize(value=nil, next_node=nil)
     # value of the current node
     @value = value
     # pointer to the next node in queue
-    @next_node = nil
+    @next_node = next_node
   end
 
 end
@@ -140,3 +144,7 @@ p list.tail.value
 list.pop
 p "current tail:"
 p list.tail.value
+
+list.prepend('sarah')
+
+list.to_s
